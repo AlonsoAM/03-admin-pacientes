@@ -1,7 +1,13 @@
 <script setup>
-import { ref } from "vue";
+import { reactive } from "vue";
 
-const nombre = ref("");
+const paciente = reactive({
+  nombre: "",
+  propietario: "",
+  email: "",
+  alta: "",
+  sintomas: "",
+});
 </script>
 
 <template>
@@ -12,7 +18,7 @@ const nombre = ref("");
       <span class="text-indigo-600 font-bold">Adminístralos</span>
     </p>
     <form class="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
-      {{ nombre }}
+      {{ paciente }}
       <!-- Nombre de la mascota -->
       <div class="mb-5">
         <label for="mascota" class="block text-gray-700 uppercase font-bold">
@@ -23,7 +29,7 @@ const nombre = ref("");
           id="mascota"
           placeholder="Nombre de la mascota"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          v-model="nombre"
+          v-model="paciente.nombre"
         />
       </div>
       <!-- Propietario de la mascota -->
@@ -39,6 +45,7 @@ const nombre = ref("");
           id="propietario"
           placeholder="Nombre del propietario"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          v-model="paciente.propietario"
         />
       </div>
       <!-- Email del propietario -->
@@ -51,6 +58,7 @@ const nombre = ref("");
           id="email"
           placeholder="Email del propietario"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          v-model="paciente.email"
         />
       </div>
       <!-- Fecha de alta de la mascota -->
@@ -62,6 +70,7 @@ const nombre = ref("");
           type="date"
           id="alta"
           class="border-2 w-full p-2 mt-2 rounded-md"
+          v-model="paciente.alta"
         />
       </div>
       <!-- Síntomas dela mascota -->
@@ -76,6 +85,7 @@ const nombre = ref("");
           cols="30"
           rows="5"
           placeholder="Describe los síntomas"
+          v-model="paciente.sintomas"
         ></textarea>
       </div>
       <!-- Botón  -->
