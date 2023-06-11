@@ -6,28 +6,49 @@ const alerta = reactive({
   tipo: "",
   mensaje: "",
 });
-
-const paciente = reactive({
-  nombre: "",
-  propietario: "",
-  email: "",
-  alta: "",
-  sintomas: "",
+const emit = defineEmits([
+  "update:nombre",
+  "update:propietario",
+  "update:email",
+  "update:alta",
+  "update:sintomas",
+  "guardar-paciente",
+]);
+const props = defineProps({
+  nombre: {
+    type: String,
+    required: true,
+  },
+  propietario: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  alta: {
+    type: String,
+    required: true,
+  },
+  sintomas: {
+    type: String,
+    required: true,
+  },
 });
-
 const validar = () => {
-  if (Object.values(paciente).includes("")) {
+  if (Object.values(props).includes("")) {
     alerta.mensaje = "Todos los campos son obligatorios";
     alerta.tipo = "error";
     return;
   }
-  console.log("Despues del if");
+  emit("guardar-paciente");
 };
 </script>
 
 <template>
   <div class="md:w-1/2">
-    <h2 class="font-black text-3xl text-center">Seguimiento Pacientes</h2>
+    <h3 class="font-black text-3xl text-center">Seguimiento Pacientes</h3>
     <p class="text-lg mt-5 text-center mb-10">
       Agrega Pacientes y
       <span class="text-indigo-600 font-bold">Adminístralos</span>
@@ -47,7 +68,8 @@ const validar = () => {
           id="mascota"
           placeholder="Nombre de la mascota"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          v-model="paciente.nombre"
+          :value="nombre"
+          @input="$emit('update:nombre', $event.target.value)"
         />
       </div>
       <!-- Propietario de la mascota -->
@@ -63,7 +85,8 @@ const validar = () => {
           id="propietario"
           placeholder="Nombre del propietario"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          v-model="paciente.propietario"
+          :value="propietario"
+          @input="$emit('update:propietario', $event.target.value)"
         />
       </div>
       <!-- Email del propietario -->
@@ -76,7 +99,8 @@ const validar = () => {
           id="email"
           placeholder="Email del propietario"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-          v-model="paciente.email"
+          :value="email"
+          @input="$emit('update:email', $event.target.value)"
         />
       </div>
       <!-- Fecha de alta de la mascota -->
@@ -88,7 +112,8 @@ const validar = () => {
           type="date"
           id="alta"
           class="border-2 w-full p-2 mt-2 rounded-md"
-          v-model="paciente.alta"
+          :value="alta"
+          @input="$emit('update:alta', $event.target.value)"
         />
       </div>
       <!-- Síntomas dela mascota -->
@@ -103,7 +128,8 @@ const validar = () => {
           cols="30"
           rows="5"
           placeholder="Describe los síntomas"
-          v-model="paciente.sintomas"
+          :value="sintomas"
+          @input="$emit('update:sintomas', $event.target.value)"
         ></textarea>
       </div>
       <!-- Botón  -->
