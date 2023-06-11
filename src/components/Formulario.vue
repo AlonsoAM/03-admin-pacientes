@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+
+const nombre = ref("");
+</script>
 
 <template>
   <div class="md:w-1/2">
@@ -8,6 +12,7 @@
       <span class="text-indigo-600 font-bold">Adminístralos</span>
     </p>
     <form class="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+      {{ nombre }}
       <!-- Nombre de la mascota -->
       <div class="mb-5">
         <label for="mascota" class="block text-gray-700 uppercase font-bold">
@@ -18,6 +23,7 @@
           id="mascota"
           placeholder="Nombre de la mascota"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          v-model="nombre"
         />
       </div>
       <!-- Propietario de la mascota -->
