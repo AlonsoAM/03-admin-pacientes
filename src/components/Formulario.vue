@@ -8,6 +8,14 @@ const paciente = reactive({
   alta: "",
   sintomas: "",
 });
+
+const validar = () => {
+  if (Object.values(paciente).includes("")) {
+    alert("Todos los campos son obligatorios");
+    return;
+  }
+  console.log("Despues del if");
+};
 </script>
 
 <template>
@@ -17,8 +25,10 @@ const paciente = reactive({
       Agrega Pacientes y
       <span class="text-indigo-600 font-bold">Adminístralos</span>
     </p>
-    <form class="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
-      {{ paciente }}
+    <form
+      class="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
+      @submit.prevent="validar"
+    >
       <!-- Nombre de la mascota -->
       <div class="mb-5">
         <label for="mascota" class="block text-gray-700 uppercase font-bold">
